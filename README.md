@@ -1,3 +1,4 @@
+
 # 🛡️ edr-detection-engineering
 
 > MITRE ATT&CK detection lab — Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
@@ -66,53 +67,53 @@ Projet réalisé seul, du 07/09/2026 16h au 08/09/2026 21h, dans le cadre de ma 
 Installation de Wazuh en mode *all-in-one* plutôt qu'une stack ELK montée à la main, pour bénéficier des règles de détection MITRE ATT&CK déjà intégrées. Premier disque de 20 Go insuffisant → redimensionné à 49 Go.
 
 <p align="center">
-  <img src="assets/images/01-wazuh-install-log-1.png" width="45%" />
-  <img src="assets/images/02-wazuh-install-log-2.png" width="45%" />
+  <img src="01-wazuh-install-log-1.png" width="45%" />
+  <img src="02-wazuh-install-log-2.png" width="45%" />
 </p>
-<p align="center"><img src="assets/images/03-wazuh-login.png" width="60%" /></p>
+<p align="center"><img src="03-wazuh-login.png" width="60%" /></p>
 
 ### 2. Déploiement de l'agent
 
 Agent Wazuh installé sur la VM Windows (`WIN10-TARGET`), enregistré et actif dans le Dashboard.
 
 <p align="center">
-  <img src="assets/images/04-wazuh-dashboard-no-agents.png" width="45%" />
-  <img src="assets/images/05-deploy-agent-windows.png" width="45%" />
+  <img src="04-wazuh-dashboard-no-agents.png" width="45%" />
+  <img src="05-deploy-agent-windows.png" width="45%" />
 </p>
 <p align="center">
-  <img src="assets/images/06-agent-install-powershell.png" width="45%" />
-  <img src="assets/images/07-wazuh-dashboard-agent-active.png" width="45%" />
+  <img src="06-agent-install-powershell.png" width="45%" />
+  <img src="07-wazuh-dashboard-agent-active.png" width="45%" />
 </p>
-<p align="center"><img src="assets/images/08-endpoints-agent-active.png" width="80%" /></p>
+<p align="center"><img src="08-endpoints-agent-active.png" width="80%" /></p>
 
 ### 3. Instrumentation avec Sysmon
 
 Installation de Sysmon avec la configuration communautaire SwiftOnSecurity (référence du secteur), pour obtenir une télémétrie exploitable (process creation avec ligne de commande complète, notamment).
 
 <p align="center">
-  <img src="assets/images/09-sysmon-download-page.png" width="45%" />
-  <img src="assets/images/10-sysmonconfig-swiftonsecurity.png" width="45%" />
+  <img src="09-sysmon-download-page.png" width="45%" />
+  <img src="10-sysmonconfig-swiftonsecurity.png" width="45%" />
 </p>
 <p align="center">
-  <img src="assets/images/11-sysmon-install-output.png" width="45%" />
-  <img src="assets/images/12-sysmon-events-check.png" width="45%" />
+  <img src="11-sysmon-install-output.png" width="45%" />
+  <img src="12-sysmon-events-check.png" width="45%" />
 </p>
-<p align="center"><img src="assets/images/13-wazuh-discover-sysmon-events.png" width="80%" /></p>
+<p align="center"><img src="13-wazuh-discover-sysmon-events.png" width="80%" /></p>
 
 ### 4. Simulation d'attaque — Atomic Red Team
 
 Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082 — System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
 
 <p align="center">
-  <img src="assets/images/14-atomicredteam-install-start.png" width="45%" />
-  <img src="assets/images/15-atomicredteam-install-complete.png" width="45%" />
+  <img src="14-atomicredteam-install-start.png" width="45%" />
+  <img src="15-atomicredteam-install-complete.png" width="45%" />
 </p>
-<p align="center"><img src="assets/images/16-invoke-atomictest-t1082-list.png" width="80%" /></p>
+<p align="center"><img src="16-invoke-atomictest-t1082-list.png" width="80%" /></p>
 <p align="center">
-  <img src="assets/images/17-invoke-atomictest-t1082-1-output.png" width="45%" />
-  <img src="assets/images/18-invoke-atomictest-t1082-1-done.png" width="45%" />
+  <img src="17-invoke-atomictest-t1082-1-output.png" width="45%" />
+  <img src="18-invoke-atomictest-t1082-1-done.png" width="45%" />
 </p>
-<p align="center"><img src="assets/images/21-atomictest-t1082-series-run.png" width="80%" /></p>
+<p align="center"><img src="21-atomictest-t1082-series-run.png" width="80%" /></p>
 
 > Certains sous-tests (Connect-AzAccount, Connect-AzureAD, Scan-AzureAdmins) échouent normalement : ce sont des atomics ciblant un tenant Azure AD, absent de ce lab local.
 
@@ -129,11 +130,11 @@ Le dashboard **Threat Hunting** de Wazuh a révélé une couverture de détectio
 | Valid Accounts | Authentifications (session Windows / dashboard) |
 
 <p align="center">
-  <img src="assets/images/19-wazuh-discover-systeminfo-event.png" width="80%" />
+  <img src="19-wazuh-discover-systeminfo-event.png" width="80%" />
 </p>
 <p align="center">
-  <img src="assets/images/22-threat-hunting-overview-1.png" width="45%" />
-  <img src="assets/images/23-threat-hunting-overview-2.png" width="45%" />
+  <img src="22-threat-hunting-overview-1.png" width="45%" />
+  <img src="23-threat-hunting-overview-2.png" width="45%" />
 </p>
 
 ### 6. Écriture d'une règle de détection personnalisée
@@ -154,15 +155,15 @@ Aucune règle native ne couvrait précisément l'exécution de `systeminfo.exe` 
 </group>
 \`\`\`
 
-<p align="center"><img src="assets/images/20-local-rules-custom-rule.png" width="80%" /></p>
+<p align="center"><img src="20-local-rules-custom-rule.png" width="80%" /></p>
 
 ### 7. Validation dans le temps
 
 Requête `rule.id: 100002` sur 24h → **2 hits confirmés**, avec la bonne description et le bon agent. La règle n'est pas un coup de chance ponctuel, elle est reproductible.
 
 <p align="center">
-  <img src="assets/images/24-threat-hunting-rule100002-dashboard.png" width="45%" />
-  <img src="assets/images/25-threat-hunting-rule100002-events.png" width="45%" />
+  <img src="24-threat-hunting-rule100002-dashboard.png" width="45%" />
+  <img src="25-threat-hunting-rule100002-events.png" width="45%" />
 </p>
 
 ---
@@ -174,7 +175,7 @@ Requête `rule.id: 100002` sur 24h → **2 hits confirmés**, avec la bonne desc
 - **1 règle de détection personnalisée** écrite, mappée MITRE, validée dans la durée.
 - Compréhension fine de la chaîne Wazuh : *decoder → champs extraits → rule → matching → alerte*.
 
-<p align="center"><img src="assets/images/26-endpoint-detail-mitre-tactics.png" width="80%" /></p>
+<p align="center"><img src="26-endpoint-detail-mitre-tactics.png" width="80%" /></p>
 
 ---
 
@@ -202,3 +203,7 @@ Requête `rule.id: 100002` sur 24h → **2 hits confirmés**, avec la bonne desc
 - LinkedIn : [linkedin.com/in/yoboue-dje](https://linkedin.com/in/yoboue-dje)
 - GitHub : [github.com/djeyoboue44-glitch](https://github.com/djeyoboue44-glitch)
 - Portfolio : [djeyoboue44-glitch.github.io](https://djeyoboue44-glitch.github.io)
+
+5. Descends en bas de page, clique **"Commit changes"**.
+
+Les images devraient s'afficher immédiatement après.
