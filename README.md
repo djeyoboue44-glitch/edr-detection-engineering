@@ -204,6 +204,3 @@ Requête `rule.id: 100002` sur 24h → **2 hits confirmés**, avec la bonne desc
 - GitHub : [github.com/djeyoboue44-glitch](https://github.com/djeyoboue44-glitch)
 - Portfolio : [djeyoboue44-glitch.github.io](https://djeyoboue44-glitch.github.io)
 
-5. Descends en bas de page, clique **"Commit changes"**.
-
-Les images devraient s'afficher immédiatement après.
