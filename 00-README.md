@@ -1,7 +1,7 @@
 
 # 🛡️ edr-detection-engineering
 
-> MITRE ATT&CK detection lab — Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
+> MITRE ATT&CK detection lab  Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
 
 ![Status](https://img.shields.io/badge/status-completed-brightgreen)
 ![Wazuh](https://img.shields.io/badge/Wazuh-4.13.1-blue)
@@ -26,16 +26,16 @@ Projet réalisé seul, du 07/09/2026 16h au 08/09/2026 21h, dans le cadre de ma 
 
 \`\`\`
                      ┌─────────────────────────────┐
-                     │   VM Ubuntu — "projet 2"      │
+                     │   VM Ubuntu  "projet 2"      │
                      │   Wazuh All-in-One             │
                      │   (Indexer + Manager +          │
-                     │    Dashboard) — v4.13.1          │
+                     │    Dashboard)  v4.13.1          │
                      │   192.168.237.154                │
                      └───────────────▲─────────────────┘
                                      │ Agent Wazuh
                                      │ (port 1514/1515)
                      ┌───────────────┴─────────────────┐
-                     │   VM Windows 10 Pro — WIN10-TARGET│
+                     │   VM Windows 10 Pro  WIN10-TARGET│
                      │   Sysmon (config SwiftOnSecurity) │
                      │   Atomic Red Team                 │
                      │   192.168.237.152                 │
@@ -43,8 +43,8 @@ Projet réalisé seul, du 07/09/2026 16h au 08/09/2026 21h, dans le cadre de ma 
 \`\`\`
 
 - **Hyperviseur** : VMware Workstation (bascule depuis VirtualBox en cours de route)
-- **VM SIEM** : Ubuntu 26.04.1 LTS — 8 vCPU / ~7,2 Go RAM / 49 Go disque
-- **VM cible** : Windows 10 Professionnel — 2 vCPU / 4 Go RAM
+- **VM SIEM** : Ubuntu 26.04.1 LTS  8 vCPU / ~7,2 Go RAM / 49 Go disque
+- **VM cible** : Windows 10 Professionnel  2 vCPU / 4 Go RAM
 - Réseau NAT, isolé de l'hôte
 
 ---
@@ -53,7 +53,7 @@ Projet réalisé seul, du 07/09/2026 16h au 08/09/2026 21h, dans le cadre de ma 
 
 | Composant | Rôle |
 |---|---|
-| **Wazuh 4.13.1** (Indexer, Manager, Dashboard) | SIEM/EDR — collecte, corrélation, alerting |
+| **Wazuh 4.13.1** (Indexer, Manager, Dashboard) | SIEM/EDR  collecte, corrélation, alerting |
 | **Sysmon v15.21** (config [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)) | Télémétrie Windows haute-fidélité (process creation, réseau, fichiers) |
 | **Atomic Red Team** (Invoke-AtomicRedTeam) | Simulation d'attaques mappées MITRE ATT&CK |
 | **PowerShell / Bash** | Automatisation et exploitation des logs |
@@ -100,9 +100,9 @@ Installation de Sysmon avec la configuration communautaire SwiftOnSecurity (réf
 </p>
 <p align="center"><img src="13-wazuh-discover-sysmon-events.png" width="80%" /></p>
 
-### 4. Simulation d'attaque — Atomic Red Team
+### 4. Simulation d'attaque  Atomic Red Team
 
-Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082 — System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
+Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082  System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
 
 <p align="center">
   <img src="14-atomicredteam-install-start.png" width="45%" />
