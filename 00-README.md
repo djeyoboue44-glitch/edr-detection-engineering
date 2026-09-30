@@ -108,6 +108,7 @@ Installation de Sysmon avec la configuration communautaire SwiftOnSecurity (réf
   <img src="12-sysmon-events-check.png" width="45%" />
 </p>
 <p align="center"><img src="13-wazuh-discover-sysmon-events.png" width="80%" /></p>
+<p align="center"><img src="30-sysmon-config-export.png" width="80%" /></p>
 
 ### 4. Simulation d'attaque — Atomic Red Team
 
@@ -190,6 +191,9 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id $e
 <p align="center">
   <img src="27-atomictest-t1003-001-list-details.png" width="80%" />
 </p>
+<p align="center">
+  <img src="38-atomictest-t1003-001-2-repeated-runs.png" width="80%" />
+</p>
 
 **Résultat côté cible :** Microsoft Defender bloque l'opération. Le fichier `lsass-comsvcs.dmp` est bien créé, mais il fait **0 octet** : l'attaque échoue, le dump n'est pas exploitable.
 
@@ -208,6 +212,10 @@ La requête `agent.name: WIN10-TARGET AND data.win.eventdata.targetImage: *lsass
 </p>
 <p align="center">
   <img src="32-threat-hunting-rule92900-noise.png" width="90%" />
+</p>
+<p align="center">
+  <img src="33-threat-hunting-events-24h.png" width="45%" />
+  <img src="34-threat-hunting-dashboard-24h.png" width="45%" />
 </p>
 
 Conséquences :
@@ -261,6 +269,10 @@ Requête `100003` dans Threat Hunting → **3 hits** (25/09/2026, 16:37 et 16:40
 - Règles versionnées dans le dépôt : [`rules/local_rules.xml`](rules/local_rules.xml).
 
 <p align="center"><img src="26-endpoint-detail-mitre-tactics.png" width="80%" /></p>
+<p align="center">
+  <img src="29-wazuh-overview-24h.png" width="45%" />
+  <img src="36-wazuh-overview-alerts.png" width="45%" />
+</p>
 
 ### Limites connues
 
