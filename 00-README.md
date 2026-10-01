@@ -1,6 +1,6 @@
 # 🛡️ edr-detection-engineering
 
-> MITRE ATT&CK detection lab Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
+> MITRE ATT&CK detection lab — Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
 
 ![Status](https://img.shields.io/badge/status-in%20progress-orange)
 ![Wazuh](https://img.shields.io/badge/Wazuh-4.13.1-blue)
@@ -108,7 +108,7 @@ Installation de Sysmon avec la configuration communautaire SwiftOnSecurity (réf
   <img src="12-sysmon-events-check.png" width="45%" />
 </p>
 <p align="center"><img src="13-wazuh-discover-sysmon-events.png" width="80%" /></p>
-<p align="center"><img src="30-sysmon-config-export.png" width="80%" /></p>
+<p align="center"><img src="30-sysmon-config-export.PNG" width="80%" /></p>
 
 ### 4. Simulation d'attaque — Atomic Red Team
 
@@ -189,16 +189,16 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id $e
 ```
 
 <p align="center">
-  <img src="27-atomictest-t1003-001-list-details.png" width="80%" />
+  <img src="27-atomictest-t1003-001-list-details.PNG" width="80%" />
 </p>
 <p align="center">
-  <img src="38-atomictest-t1003-001-2-repeated-runs.png" width="80%" />
+  <img src="38-atomictest-t1003-001-2-repeated-runs.PNG" width="80%" />
 </p>
 
 **Résultat côté cible :** Microsoft Defender bloque l'opération. Le fichier `lsass-comsvcs.dmp` est bien créé, mais il fait **0 octet** : l'attaque échoue, le dump n'est pas exploitable.
 
 <p align="center">
-  <img src="28-dump-lsass-defender-blocked-0-bytes.png" width="70%" />
+  <img src="28-dump-lsass-defender-blocked-0-bytes.PNG" width="70%" />
 </p>
 
 > **Point important pour un détection engineer :** une attaque bloquée par l'antivirus n'est pas une attaque invisible. Sysmon journalise quand même la *tentative* (Event ID 10, *ProcessAccess*), et c'est cette tentative qu'un SOC veut voir remonter.
@@ -208,14 +208,14 @@ rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id $e
 La requête `agent.name: WIN10-TARGET AND data.win.eventdata.targetImage: *lsass.exe*` fait remonter des événements Sysmon Event ID 10, mais le constat est ambigu : la règle native **92900** (niveau 12, « Lsass process was accessed by … ») se déclenche principalement sur **`MsMpEng.exe`** (Microsoft Defender) et **`svchost.exe`**, c'est-à-dire des accès légitimes.
 
 <p align="center">
-  <img src="31-sysmon-event10-msmpeng-lsass.png" width="90%" />
+  <img src="31-sysmon-event10-msmpeng-lsass.PNG" width="90%" />
 </p>
 <p align="center">
-  <img src="32-threat-hunting-rule92900-noise.png" width="90%" />
+  <img src="32-threat-hunting-rule92900-noise.PNG" width="90%" />
 </p>
 <p align="center">
-  <img src="33-threat-hunting-events-24h.png" width="45%" />
-  <img src="34-threat-hunting-dashboard-24h.png" width="45%" />
+  <img src="33-threat-hunting-events-24h.PNG" width="45%" />
+  <img src="34-threat-hunting-dashboard-24h.PNG" width="45%" />
 </p>
 
 Conséquences :
@@ -245,7 +245,7 @@ Règle plus précise, qui croise trois champs de l'événement Sysmon Event ID 1
 Une étape de débogage a été nécessaire : le nom du groupe parent devait correspondre exactement à celui utilisé dans le ruleset Wazuh. Je l'ai vérifié en comparant avec `0800-sysmon_id_1.xml`, puis corrigé `sysmon_event10` → `sysmon_event_10` avec `sed`.
 
 <p align="center">
-  <img src="35-local-rules-100003-sed-fix.png" width="90%" />
+  <img src="35-local-rules-100003-sed-fix.PNG" width="90%" />
 </p>
 
 ### 11. Validation
@@ -253,7 +253,7 @@ Une étape de débogage a été nécessaire : le nom du groupe parent devait cor
 Requête `100003` dans Threat Hunting → **3 hits** (25/09/2026, 16:37 et 16:40), niveau 12, description « T1003.001 - LSASS dump via comsvcs.dll (rundll32) », agent `WIN10-TARGET`.
 
 <p align="center">
-  <img src="37-threat-hunting-rule100003-3-hits.png" width="90%" />
+  <img src="37-threat-hunting-rule100003-3-hits.PNG" width="90%" />
 </p>
 
 ---
@@ -270,8 +270,8 @@ Requête `100003` dans Threat Hunting → **3 hits** (25/09/2026, 16:37 et 16:40
 
 <p align="center"><img src="26-endpoint-detail-mitre-tactics.png" width="80%" /></p>
 <p align="center">
-  <img src="29-wazuh-overview-24h.png" width="45%" />
-  <img src="36-wazuh-overview-alerts.png" width="45%" />
+  <img src="29-wazuh-overview-24h.PNG" width="45%" />
+  <img src="36-wazuh-overview-alerts.PNG" width="45%" />
 </p>
 
 ### Limites connues
