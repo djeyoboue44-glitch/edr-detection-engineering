@@ -1,6 +1,6 @@
 # 🛡️ edr-detection-engineering
 
-> MITRE ATT&CK detection lab — Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
+> MITRE ATT&CK detection lab  Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
 
 ![Status](https://img.shields.io/badge/status-in%20progress-orange)
 ![Wazuh](https://img.shields.io/badge/Wazuh-4.13.1-blue)
@@ -51,8 +51,8 @@ Projet réalisé seul, dans le cadre de mon Mastère Expert IT (cybersécurité)
 ```
 
 - **Hyperviseur** : VMware Workstation (bascule depuis VirtualBox en cours de route)
-- **VM SIEM** : Ubuntu 26.04.1 LTS — 8 vCPU / ~7,2 Go RAM / 49 Go disque
-- **VM cible** : Windows 10 Professionnel — 2 vCPU / 4 Go RAM
+- **VM SIEM** : Ubuntu 26.04.1 LTS  8 vCPU / ~7,2 Go RAM / 49 Go disque
+- **VM cible** : Windows 10 Professionnel  2 vCPU / 4 Go RAM
 - Réseau NAT, isolé de l'hôte
 
 ---
@@ -69,7 +69,7 @@ Projet réalisé seul, dans le cadre de mon Mastère Expert IT (cybersécurité)
 
 ---
 
-## 🧪 Phase 1 — Déploiement du lab et première règle (T1082)
+## 🧪 Phase 1  Déploiement du lab et première règle (T1082)
 
 ### 1. Déploiement du SIEM
 
@@ -110,9 +110,9 @@ Installation de Sysmon avec la configuration communautaire SwiftOnSecurity (réf
 <p align="center"><img src="13-wazuh-discover-sysmon-events.png" width="80%" /></p>
 <p align="center"><img src="30-sysmon-config-export.PNG" width="80%" /></p>
 
-### 4. Simulation d'attaque — Atomic Red Team
+### 4. Simulation d'attaque Atomic Red Team
 
-Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082 — System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
+Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082  System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
 
 <p align="center">
   <img src="14-atomicredteam-install-start.png" width="45%" />
