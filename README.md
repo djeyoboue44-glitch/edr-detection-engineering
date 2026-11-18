@@ -1,6 +1,6 @@
 # 🛡️ edr-detection-engineering
 
-> MITRE ATT&CK detection lab — Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
+> MITRE ATT&CK detection lab : Wazuh SIEM/EDR, Sysmon telemetry, adversary emulation with Atomic Red Team, and custom detection rule engineering.
 
 ![Status](https://img.shields.io/badge/status-in%20progress-orange)
 ![Wazuh](https://img.shields.io/badge/Wazuh-4.13.1-blue)
@@ -22,7 +22,7 @@ Le projet avance par phases :
 
 | Phase | Période | Contenu | Statut |
 |---|---|---|---|
-| 1 | 07/09 – 08/09/2026 | Déploiement du lab, T1082 (System Information Discovery), règle 100002 | ✅ Terminée |
+| 1 | 07/09 au 08/09/2026 | Déploiement du lab, T1082 (System Information Discovery), règle 100002 | ✅ Terminée |
 | 2 | 25/09/2026 | T1003.001 (dump LSASS), règle 100003, analyse du bruit de la règle native 92900 | ✅ Terminée |
 | 3 | octobre 2026 | T1218.011 (Rundll32), T1547.001 (persistance), T1490 (suppression des sauvegardes), règles 100004, 100006, 100007, 100008, matrice de couverture | ✅ Terminée |
 | 4 | 09/11/2026 | Réglage du bruit des règles natives : 92900 (Defender) et 92213 (663 alertes de niveau 15), règles 100005, 100009, 100010 | ✅ Terminée |
@@ -36,16 +36,16 @@ Projet réalisé seul, dans le cadre de mon Mastère Expert IT (cybersécurité)
 
 ```
                      ┌─────────────────────────────┐
-                     │   VM Ubuntu — "projet 2"      │
+                     │   VM Ubuntu - "projet 2"      │
                      │   Wazuh All-in-One             │
                      │   (Indexer + Manager +          │
-                     │    Dashboard) — v4.13.1          │
+                     │    Dashboard) - v4.13.1          │
                      │   192.168.237.154                │
                      └───────────────▲─────────────────┘
                                      │ Agent Wazuh
                                      │ (port 1514/1515)
                      ┌───────────────┴─────────────────┐
-                     │   VM Windows 10 Pro — WIN10-TARGET│
+                     │   VM Windows 10 Pro - WIN10-TARGET│
                      │   Sysmon (config SwiftOnSecurity) │
                      │   Atomic Red Team                 │
                      │   192.168.237.152                 │
@@ -53,8 +53,8 @@ Projet réalisé seul, dans le cadre de mon Mastère Expert IT (cybersécurité)
 ```
 
 - **Hyperviseur** : VMware Workstation (bascule depuis VirtualBox en cours de route)
-- **VM SIEM** : Ubuntu 26.04.1 LTS — 8 vCPU / ~7,2 Go RAM / 49 Go disque
-- **VM cible** : Windows 10 Professionnel — 2 vCPU / 4 Go RAM
+- **VM SIEM** : Ubuntu 26.04.1 LTS, 8 vCPU / ~7,2 Go RAM / 49 Go disque
+- **VM cible** : Windows 10 Professionnel, 2 vCPU / 4 Go RAM
 - Réseau NAT, isolé de l'hôte
 
 ---
@@ -63,7 +63,7 @@ Projet réalisé seul, dans le cadre de mon Mastère Expert IT (cybersécurité)
 
 | Composant | Rôle |
 |---|---|
-| **Wazuh 4.13.1** (Indexer, Manager, Dashboard) | SIEM/EDR — collecte, corrélation, alerting |
+| **Wazuh 4.13.1** (Indexer, Manager, Dashboard) | SIEM/EDR : collecte, corrélation, alerting |
 | **Sysmon v15.21** (config [SwiftOnSecurity](https://github.com/SwiftOnSecurity/sysmon-config)) | Télémétrie Windows haute-fidélité (process creation, accès aux processus, réseau, fichiers) |
 | **Atomic Red Team** (Invoke-AtomicRedTeam) | Simulation d'attaques mappées MITRE ATT&CK |
 | **PowerShell / Bash** | Automatisation et exploitation des logs |
@@ -71,7 +71,7 @@ Projet réalisé seul, dans le cadre de mon Mastère Expert IT (cybersécurité)
 
 ---
 
-## 🧪 Phase 1 — Déploiement du lab et première règle (T1082)
+## 🧪 Phase 1 : Déploiement du lab et première règle (T1082)
 
 ### 1. Déploiement du SIEM
 
@@ -112,9 +112,9 @@ Installation de Sysmon avec la configuration communautaire SwiftOnSecurity (réf
 <p align="center"><img src="13-wazuh-discover-sysmon-events.png" width="80%" /></p>
 <p align="center"><img src="30-sysmon-config-export.PNG" width="80%" /></p>
 
-### 4. Simulation d'attaque — Atomic Red Team
+### 4. Simulation d'attaque avec Atomic Red Team
 
-Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082 — System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
+Installation d'Invoke-AtomicRedTeam et exécution de plusieurs sous-techniques de **T1082, System Information Discovery** (`systeminfo`, requêtes registre, WMIC, découverte de comptes...).
 
 <p align="center">
   <img src="14-atomicredteam-install-start.png" width="45%" />
@@ -180,11 +180,11 @@ Requête `rule.id: 100002` sur 24h → **2 hits confirmés**, avec la bonne desc
 
 ---
 
-## 🔐 Phase 2 — Credential Access : dump de LSASS (T1003.001)
+## 🔐 Phase 2 : Credential Access, dump de LSASS (T1003.001)
 
 ### 8. Simulation : dump de la mémoire de LSASS via comsvcs.dll
 
-**T1003.001 — OS Credential Dumping: LSASS Memory** est une technique très utilisée pour voler des identifiants hors ligne. Le test Atomic **T1003.001-2** utilise une DLL native de Windows, sans outil externe :
+**T1003.001, OS Credential Dumping: LSASS Memory** est une technique très utilisée pour voler des identifiants hors ligne. Le test Atomic **T1003.001-2** utilise une DLL native de Windows, sans outil externe :
 
 ```powershell
 rundll32.exe C:\Windows\System32\comsvcs.dll, MiniDump (Get-Process lsass).id $env:TEMP\lsass-comsvcs.dmp full
@@ -224,7 +224,7 @@ Conséquences :
 - La règle native donne le **même niveau d'alerte (12)** à une activité légitime qu'à une attaque potentielle : c'est du bruit qui noie le signal.
 - Elle n'identifie pas la technique utilisée (ici `rundll32` + `comsvcs.dll`).
 
-### 10. Règle personnalisée 100003 — LSASS dump via comsvcs.dll
+### 10. Règle personnalisée 100003 : LSASS dump via comsvcs.dll
 
 Règle plus précise, qui croise trois champs de l'événement Sysmon Event ID 10 : la cible (`lsass.exe`), la source (`rundll32.exe`) et la présence de `comsvcs.dll` dans la pile d'appels (`callTrace`) :
 
@@ -260,13 +260,13 @@ Requête `100003` dans Threat Hunting → **3 hits** (25/09/2026, 16:37 et 16:40
 
 ---
 
-## 🧩 Phase 3 — Élargir la couverture : exécution, persistance, impact (octobre 2026)
+## 🧩 Phase 3 : Élargir la couverture, exécution, persistance, impact (octobre 2026)
 
 Trois nouvelles techniques, même démarche à chaque fois : simuler avec Atomic Red Team, regarder ce que Wazuh dit nativement, identifier l'angle mort, écrire une règle sur ce que le SIEM **reçoit réellement**, puis valider avec une vraie alerte.
 
 > Principe retenu : **détecter l'effet, pas l'outil**. Les règles natives surveillent souvent un exécutable précis (`reg.exe`, `rundll32.exe`) alors qu'un attaquant peut obtenir le même résultat autrement.
 
-### 12. T1218.011 — Rundll32 : exécution d'un fichier qui n'est pas une DLL
+### 12. T1218.011 Rundll32 : exécution d'un fichier qui n'est pas une DLL
 
 `rundll32.exe` charge normalement des `.dll` (ou `.cpl`, `.ocx`). Les tests Atomic **-10** (`rundll32.exe calc.png, StartW`) et **-14** (`rundll32.exe _WT.init,krnl`) lui font charger un fichier d'une autre extension, une technique d'évasion courante.
 
@@ -279,7 +279,7 @@ Une première version de l'expression ne se déclenchait jamais : **la ligne de 
 **Validation :** 5 alertes (3 pour `calc.png`, 2 pour `_WT.init`) le 12/10/2026.
 **Limite :** une DLL malveillante portant une extension `.dll` passe inaperçue ; les variantes JavaScript et VBScript (tests -1, -2, -3) ne sont pas couvertes.
 
-### 13. T1547.001 — Persistance par clé de registre Run
+### 13. T1547.001 : Persistance par clé de registre Run
 
 Sysmon journalise l'écriture d'une valeur dans `Run` / `RunOnce` (Event ID 13). Côté Wazuh :
 
@@ -301,7 +301,7 @@ Ce que ce test a appris :
 
 **Limite :** liste fixe d'interpréteurs ; le dossier Démarrage (tests -4 à -7) n'est pas testé (2 tests sur 21 réalisés).
 
-### 14. T1490 — Inhibit System Recovery : suppression des clichés instantanés
+### 14. T1490 Inhibit System Recovery : suppression des clichés instantanés
 
 Un ransomware supprime les copies de sauvegarde Windows avant de chiffrer. Tests Atomic **-1** (`vssadmin delete shadows`) et **-2** (`wmic shadowcopy delete`).
 
@@ -326,7 +326,7 @@ Synthèse des cinq techniques testées : trace Sysmon, détection native, règle
 
 ---
 
-## 🔇 Phase 4 — Régler le bruit des règles natives (novembre 2026)
+## 🔇 Phase 4 : Régler le bruit des règles natives (novembre 2026)
 
 Une détection qui crie tout le temps n'est plus lue. Cette phase s'attaque à deux règles natives trop larges, avec la même méthode : **compter, identifier qui déclenche, écrire une règle étroite, vérifier**.
 
@@ -476,7 +476,7 @@ Fichier : [`rules/tuning-92213-100009-100010.xml`](rules/tuning-92213-100009-100
 
 ## 👤 Auteur
 
-**Yoboue Dje Nicolas** — Étudiant en Mastère Expert IT (cybersécurité, réseaux, systèmes), en alternance.
+**Yoboue Dje Nicolas**, étudiant en Mastère Expert IT (cybersécurité, réseaux, systèmes), en alternance.
 
 - LinkedIn : [linkedin.com/in/yoboue-dje](https://linkedin.com/in/yoboue-dje)
 - GitHub : [github.com/djeyoboue44-glitch](https://github.com/djeyoboue44-glitch)
